@@ -12,21 +12,14 @@
     {{>navbar}}
     <h1>register page</h1>
 
-    <form action="/register" method="POST">
+    <form action="register" method="POST">
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="firstname" name="firstname">
+
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="lastname" name="lastname">
 
-{{!-- 
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="email" name="email"> --}}
-
-        {{!-- gender --}}
-        {{!-- <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="phone"
-            name="phone">
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="age"
-            name="age"> --}}
+            
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="password" name="password">
 
@@ -34,7 +27,7 @@
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="confirmpassword" name="confirmpassword">
 
-        <input type="submit" value="Register">
+        <button type="submit">register</button>
     </form>
 </body>
 
