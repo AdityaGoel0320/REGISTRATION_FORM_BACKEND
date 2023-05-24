@@ -82,15 +82,25 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     try {
         let emailEntered = req.body.email
-        let passwordEntered = req.body.passsword
+        let passwordEntered = req.body.password
+        console.log(passwordEntered)
+        
+        // let userEmail = await Register.findOne({ email: emailEntered, password: passswordEntered })
+        // to check this email indatabse or not
+        let userEmail = await Register.findOne({ email: emailEntered })
+        
+        console.log(userEmail.password)
+        if(userEmail.password===passwordEntered){
+            res.send("login successfully")
+        }
+        else{
 
-        let userEmail = await Register.findOne({ email: emailEntered, password: passswordEntered })
+            res.send("password is wrong")
+        }
 
-        console.log(userEmail)
 
     } catch (error) {
         res.status(400).send("error in login")
-        // res.status(400).send(error)
     }
 })
 
