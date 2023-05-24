@@ -91,11 +91,11 @@ app.post("/login", async (req, res) => {
         
         console.log(userEmail.password)
         if(userEmail.password===passwordEntered){
-            res.send("login successfully")
+            res.status(201).render("index")
         }
         else{
+            res.status(201).send("password is wrong")
 
-            res.send("password is wrong")
         }
 
 
