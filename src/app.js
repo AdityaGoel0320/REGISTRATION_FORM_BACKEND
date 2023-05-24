@@ -104,6 +104,21 @@ app.post("/login", async (req, res) => {
     }
 })
 
+
+
+let bcrypt = require("bcrypt")
+
+let securePasswors = async (password)=>{
+    let x = await bcrypt.hash(password , 10) ;
+
+    // noqw you have to check that password enter in login and refistert form are same
+
+    let  y = await bcrypt.compare(passow)
+    console.log(x)
+}
+securePasswors("thapa@123") ; 
+
+
 app.listen(PORT, () => {
     console.log(`runnung at ${PORT}`)
 })
