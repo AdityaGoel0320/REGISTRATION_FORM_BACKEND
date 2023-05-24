@@ -38,6 +38,10 @@ app.get("/register", (req, res) => {
     res.render("register")
 })
 
+app.get("/login", (req, res) => {
+    res.render("login")
+})
+
 
 // now make it like rest api crud  operation as adding in database
 app.post("/register", async (req, res) => {
@@ -53,11 +57,12 @@ app.post("/register", async (req, res) => {
             let employeeRegister = new Register({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
+                email: req.body.email,
                 password: req.body.password,
                 confirmpassword: req.body.confirmpassword,
 
             })
-            
+
             let registerd = await employeeRegister.save()
             res.status(201).send(registerd)
 
@@ -73,6 +78,21 @@ app.post("/register", async (req, res) => {
 })
 
 
+
+app.post("/login", async (req, res) => {
+    try {
+        let emailEntered = req.body.email
+        let passwordEntered = req.body.passsword
+
+        let userEmail = await Register.findOne({ email: emailEntered, password: passswordEntered })
+
+        console.log(userEmail)
+
+    } catch (error) {
+        res.status(400).send("error in login")
+        // res.status(400).send(error)
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`runnung at ${PORT}`)

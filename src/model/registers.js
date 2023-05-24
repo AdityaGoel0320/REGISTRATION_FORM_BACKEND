@@ -11,6 +11,10 @@ let employeeSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        email: {
+            type: String,
+            required: true,
+        },
         password: {
             type: String,
             required: true,
@@ -21,11 +25,11 @@ let employeeSchema = new mongoose.Schema(
         },
 
     }
-) 
+)
 
 
 // now making collection of this schema
-let Register = new mongoose.model("Register" , employeeSchema)
+let Register = new mongoose.model("Register", employeeSchema)
 
 
 module.exports = Register   
