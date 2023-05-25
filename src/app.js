@@ -66,6 +66,7 @@ app.post("/register", async (req, res) => {
 
             let token = await employeeRegister.generateAuthToken(); 
 
+            
             // as before saving here password get hash so using middleware in schema file
 
             let registerd = await employeeRegister.save()
