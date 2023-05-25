@@ -53,7 +53,7 @@ app.post("/register", async (req, res) => {
         let confirmpassword = req.body.confirmpassword;
 
         if (req.body.confirmpassword === req.body.password) {
-            console.log("yout enterd in if ")
+
             let employeeRegister = new Register({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -62,6 +62,11 @@ app.post("/register", async (req, res) => {
                 confirmpassword: req.body.confirmpassword,
 
             })
+            // now i want to make  jwt token begore saving in database
+
+            let token = await employeeRegister.generateAuthToken(); 
+
+            // as before saving here password get hash so using middleware in schema file
 
             let registerd = await employeeRegister.save()
             res.status(201).send(registerd)
@@ -81,21 +86,22 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try {
+
         let emailEntered = req.body.email
         let passwordEntered = req.body.password
-        console.log(passwordEntered)
-        
-        // let userEmail = await Register.findOne({ email: emailEntered, password: passswordEntered })
-        // to check this email indatabse or not
+
         let userEmail = await Register.findOne({ email: emailEntered })
-        
+
         console.log(userEmail.password)
-        if(userEmail.password===passwordEntered){
+
+        // as now we want to compare hqash password with user entered password
+        let bcryptjs = require("bcryptjs")
+        let isMatch = await bcryptjs.compare(passwordEntered, userEmail.password);
+        if (isMatch) {
             res.status(201).render("index")
         }
-        else{
+        else {
             res.status(201).send("password is wrong")
-
         }
 
 
