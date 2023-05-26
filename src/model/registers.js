@@ -1,4 +1,6 @@
 let mongoose = require("mongoose")
+// let bcrypt = require("bcrypt")
+
 
 let employeeSchema = new mongoose.Schema(
     {
@@ -20,7 +22,7 @@ let employeeSchema = new mongoose.Schema(
         },
         confirmpassword: {
             type: String,
-            required: true,
+            // required: true,
         },
 
         // now as this token will be added in db so that on login we can check the user
@@ -64,7 +66,7 @@ employeeSchema.pre("save", async function (next) {
         this.password = await bcrypt.hash(this.password, 10);
 
         // as now confirm password is useless
-        this.confirmpassword = await bcrypt.hash(this.confirmpassword, 10);
+        this.confirmpassword = undefined;
     }
     next();
 

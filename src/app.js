@@ -60,9 +60,7 @@ app.get("/login", (req, res) => {
 
 // now make it like rest api crud  operation as adding in database
 app.post("/register", async (req, res) => {
-    console.log("you clicked on register post ")
     try {
-        console.log("yout entered try of fnc")
 
         let password = req.body.password;
         let confirmpassword = req.body.confirmpassword;
@@ -110,9 +108,10 @@ app.post("/login", async (req, res) => {
 
         console.log(userEmail.password)
 
-        // as now we want to compare hqash password with user entered password
+        // as now we want to compare hash password with user entered password
         let bcryptjs = require("bcryptjs")
         let isMatch = await bcryptjs.compare(passwordEntered, userEmail.password);
+        
         if (isMatch) {
             res.status(201).render("index")
         }
