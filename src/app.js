@@ -2,6 +2,9 @@ let express = require("express")
 let app = express();
 let PORT = process.env.PORT || 3000;
 
+
+
+
 let path = require("path")
 
 
@@ -9,11 +12,19 @@ let path = require("path")
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+
+// ********************  code for database starts ********************
 // importing databse connection code
 require("./db/conn.js")
 
 // importing model of databse (Register)
 let Register = require("./model/registers")
+
+// ********************  code for database ends ********************
+
+
+
+// ********************  code for use of hbs and dynamic website in express starts ********************
 
 
 // now making dynamic express website using hbs
@@ -28,11 +39,15 @@ let hbsPath = path.join(__dirname, "../templates/partials")
 hbs.registerPartials(hbsPath)
 
 
-// routing of different pages
+// ********************  code for use of hbs and dynamic website in express starts ********************
+
+
+
+//  ******************** routing of different pages starts ********************
+
 app.get("/", (req, res) => {
     res.render("index")
 })
-
 
 app.get("/register", (req, res) => {
     res.render("register")
@@ -112,18 +127,6 @@ app.post("/login", async (req, res) => {
 })
 
 
-
-// let bcrypt = require("bcrypt")
-
-// let securePasswors = async (password)=>{
-//     let x = await bcrypt.hash(password , 10) ;
-
-//     // noqw you have to check that password enter in login and refistert form are same
-
-//     let  y = await bcrypt.compare(passow)
-//     console.log(x)
-// }
-// securePasswors("thapa@123") ; 
 
 
 app.listen(PORT, () => {
