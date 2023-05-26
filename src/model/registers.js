@@ -42,13 +42,9 @@ employeeSchema.methods.generateAuthToken = async function () {
     console.log("hi in jwt fnc")
     try {
 
-        let tokenGenerated = jwt.sign({ id: this._id.toString() }, "myNameIsAdityaGoelAndThisIsBackendForm")
-
-
+        let tokenGenerated = jwt.sign({ id: this._id.toString() }, process.env.SECRET_KEY)
         this.tokens = this.tokens.concat({token:tokenGenerated})
-
         await this.save(); 
-
         return tokenGenerated ; 
 
     } catch (error) {

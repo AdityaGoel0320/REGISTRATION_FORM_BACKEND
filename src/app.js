@@ -1,3 +1,7 @@
+// require('dotenv').config(); 
+// require('dotenv').config()
+
+
 let express = require("express")
 let app = express();
 let PORT = process.env.PORT || 3000;
@@ -105,6 +109,11 @@ app.post("/login", async (req, res) => {
         let passwordEntered = req.body.password
 
         let userEmail = await Register.findOne({ email: emailEntered })
+
+
+
+        let token = await userEmail.generateAuthToken(); 
+        console.log(token)
 
         console.log(userEmail.password)
 
