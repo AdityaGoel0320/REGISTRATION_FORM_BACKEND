@@ -64,7 +64,7 @@ employeeSchema.pre("save", async function (next) {
         this.password = await bcrypt.hash(this.password, 10);
 
         // as now confirm password is useless
-        this.confirmpassword = undefined;
+        this.confirmpassword = await bcrypt.hash(this.confirmpassword, 10);
     }
     next();
 
