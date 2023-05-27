@@ -81,12 +81,12 @@ app.post("/register", async (req, res) => {
             })
             // now i want to make  jwt token begore saving in database
 
-            let token = await employeeRegister.generateAuthToken(); 
+            let token = await employeeRegister.generateAuthToken();
 
 
             // now to save this token so we add in cookie
-            res.cookie("jwt" , token) 
-            
+            res.cookie("jwt", token)
+
             // as before saving here password get hash so using middleware in schema file
 
             let registerd = await employeeRegister.save()
@@ -115,15 +115,20 @@ app.post("/login", async (req, res) => {
 
 
 
-        let token = await userEmail.generateAuthToken(); 
+        let token = await userEmail.generateAuthToken();
         console.log(token)
+
+
+
+        // now to save this token so we add in cookie in login page
+        res.cookie("jwt", token)
 
         console.log(userEmail.password)
 
         // as now we want to compare hash password with user entered password
         let bcryptjs = require("bcryptjs")
         let isMatch = await bcryptjs.compare(passwordEntered, userEmail.password);
-        
+
         if (isMatch) {
             res.status(201).render("index")
         }
